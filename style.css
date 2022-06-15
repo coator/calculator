@@ -1,0 +1,71 @@
+html {
+  background-color: aqua;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 30pt;
+  padding:5pt;
+}
+
+.bodyHolder {
+  background-color: darkorange;
+  border-radius: 3pt;
+  border: 2pt solid #000;
+  width: 300pt;
+  height: 450pt;
+  padding:5pt;
+  display: grid;
+  justify-content: center;
+  grid-gap: 10pt;
+  grid-template-rows: 50pt;
+  grid-template-columns: 90%;
+  grid-template-areas: 
+        "c c c"
+        "a a a"
+        "a a a"
+        "a a a"
+        "a a a";
+      }
+
+
+.calcDisplay {
+  background-color: #10827a;
+  border: .5pt solid #000;
+  border-radius: 2pt;
+  margin-top: 5pt;
+  padding: 10pt 2pt 2pt 2pt;
+  text-align: right;
+  grid-area: c;
+  
+}
+
+#item1 {
+  grid-area: aa;
+}
+
+#item17{
+  grid-area: bb;
+}
+
+.buttonHolder {
+  display: grid;
+  grid-area: a;
+  margin-top: 10pt;
+  grid-gap: 5pt;
+  grid-template-areas: 
+  " aa aa . ."
+  ". . . ."
+  ". . . ."
+  ". . . ."
+  "bb bb . ."
+}
+
+.buttonHolder > button {
+  border: 2px solid #000;
+  border-radius: 3pt;
+  background-color:coral;
+  text-align: center;
+  font-size: 18pt;
+  /* this is going to cause problems on different displays, i need to set a max on
+  the button holder */
+  padding: 10pt 0 ;
+  text-justify: inter-cluster;
+}
