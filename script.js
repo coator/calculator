@@ -28,42 +28,46 @@ let subtract = (a, b) => a - b
 let multiply = (a, b) => a * b
 let division = (a, b) => a / b
 
+
 // assign operation buttons
 buttonAddition.addEventListener('click', () => addition)
 buttonSubtract.addEventListener('click', () => subtract)
 buttonMultiply.addEventListener('click', () => multiply)
 buttonDivide.addEventListener('click', () => division)
 
-// assign clear and equals button
+
+// assign equals button
 buttonEquals.addEventListener('click', () => operate)
 
 
-// integer holder function
+// integer holder array for the current number displayed
 const intButtons = document.querySelectorAll('.intButton')
 
 
-// assigns holdNum function to intButtons allowing numbers to concencate
+//reset value onload
+calcDisplay.innerHTML = [0,0,0,0,0,0,0,0,0,0,0,0,0].join('')
+
+//function that adds listener event to add integers to holdNum array
 // bind method allows to add outer functions into inner function before calling them.
-
-let holder = 0
-
+let holder = []
 for (i = 0; i < intButtons.length; i++){
   intButtons[i].addEventListener('click', holdNum.bind(this, intButtons[i]));
   function holdNum(num){
     if (holder.length <= 14) {
-    holder = holder+num.value
-    calcDisplay.innerHTML = holder
+    holder.push(num.value)
+    calcDisplay.innerHTML = holder.join('')
   }}
 };
 
 
 //functionality for clear button
 function clearHolder(){
-  holder = ''; 
+  holder = []; 
   calcDisplay.innerHTML= holder;
 }
 
 buttonClear.addEventListener('click', clearHolder)
+
 
 // function operate
 let operate = function(a,b,c){
