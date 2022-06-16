@@ -6,6 +6,7 @@ html {
 }
 
 .bodyHolder {
+  margin-left: 300pt;
   background-color: #A0522D;
   border-radius: 3pt;
   border: 2pt solid #000;
