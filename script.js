@@ -50,7 +50,7 @@ calcDisplay.innerHTML = [0,0,0,0,0,0,0,0,0,0,0,0,0].join('')
 //function that adds listener event to add integers to holdNum array
 // bind method allows to add outer functions into inner function before calling them.
 let holder = []
-for (i = 0; i < intButtons.length; i++){
+for (let i = 0; i < intButtons.length; i++){
   intButtons[i].addEventListener('click', holdNum.bind(this, intButtons[i]));
   function holdNum(num){
     if (holder.length <= 14) {
@@ -61,10 +61,24 @@ for (i = 0; i < intButtons.length; i++){
 
 
 //functionality for clear button
-function clearHolder(){
-  holder = []; 
-  calcDisplay.innerHTML= holder;
+// LastButton holds last button to determine if clear was pressed twice
+
+let allButtons = document.getElementsByTagName('button')
+let lastButton = []
+for (let i = 0; i < allButtons.length; i++){
+  allButtons[i].addEventListener('click', function() {
+    lastButton[0] = lastButton[1];
+    lastButton[1] = allButtons[i].id;
+  });
 }
+function clearHolder(){
+  if (lastButton[0] = 'item1'){
+    //placeholder for reset calc function
+  } else {
+    holder = []; 
+    calcDisplay.innerHTML= holder;
+  }
+};
 
 buttonClear.addEventListener('click', clearHolder)
 
