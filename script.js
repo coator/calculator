@@ -20,6 +20,7 @@ const button0 = document.querySelector('#item17');
 const buttonPrecision = document.querySelector('#item19');
 const buttonEquals = document.querySelector('#item20');
 const button = document.querySelectorAll('button')
+let calcDisplay = document.querySelector('.calcDisplay')
 
 // assign integer values to buttons; not nessecary with value attribute
 // button1.addEventListener('click', () => 1);
@@ -38,7 +39,6 @@ let addition = (a, b) => a + b
 let subtract = (a, b) => a - b
 let multiply = (a, b) => a * b
 let division = (a, b) => a / b
-let operate = (a,b,c) => a(b,c)
 
 // assign operation buttons
 buttonAddition.addEventListener('click', () => addition )
@@ -50,17 +50,34 @@ buttonDivide.addEventListener('click', () => division)
 buttonClear.addEventListener('click', () => 'return')
 buttonEquals.addEventListener('click', () => operate)
 
+
 // integer holder function and runthru process
-let numHolder1 = 0
-let numHolder2 = 0
 const intButtons = document.querySelectorAll('.intButton')
-console.log(intButtons)
-for (let i = 0; i < intButtons.length; i++){
-intButtons[i].addEventListener('click', () => console.log(intButtons[i].value))
-}
 
- const calcProcess = function(){
-  while (True){
+// adding to numHolder1
+let numHolder1 = ''
 
+
+
+for (i = 0; i < intButtons.length; i++){
+  intButtons[i].addEventListener('click', addNum)
+  function addNum(){
+    numHolder1 = numHolder1+intButtons[i].value
+    calcDisplay.innerHTML = numHolder1
   }
+};
+
+
+//adding to numHolder2
+// let addNum2 = function(b){
+//   return numHolder2 = numHolder2+b
+// }
+// for (i = 0; i < intButtons.length; i++){
+//   intButtons[i].addEventListener('click', () => addNum2(intButtons[i].value)
+//   )};
+
+
+// function operate
+let operate = function(a,b,c){
+
 }
