@@ -1,6 +1,9 @@
 
 // Buttons for each item on the calculator
 
+// integers are intButtons
+// items =, /, *, -, +, = are actionButtons
+
 const buttonClear = document.querySelector('#item1');
 const buttonRemember = document.querySelector('#item3');
 const buttonDivide = document.querySelector('#item4');
@@ -28,13 +31,11 @@ let subtract = (a, b) => a - b
 let multiply = (a, b) => a * b
 let division = (a, b) => a / b
 
-
 // assign operation buttons
 buttonAddition.addEventListener('click', () => addition)
 buttonSubtract.addEventListener('click', () => subtract)
 buttonMultiply.addEventListener('click', () => multiply)
 buttonDivide.addEventListener('click', () => division)
-
 
 // assign equals button
 buttonEquals.addEventListener('click', () => operate)
@@ -45,24 +46,12 @@ const intButtons = document.querySelectorAll('.intButton')
 
 
 //reset value onload
-calcDisplay.innerHTML = [0,0,0,0,0,0,0,0,0,0,0,0,0].join('')
+let defaultValue = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+calcDisplay.innerHTML = defaultValue.join('')
 
-//function that adds listener event to add integers to holdNum array
-// bind method allows to add outer functions into inner function before calling them.
-let holder = []
-for (let i = 0; i < intButtons.length; i++){
-  intButtons[i].addEventListener('click', holdNum.bind(this, intButtons[i]));
-  function holdNum(num){
-    if (holder.length <= 14) {
-    holder.push(num.value)
-    calcDisplay.innerHTML = holder.join('')
-  }}
-};
-
-
-//functionality for clear button
 // LastButton holds last button to determine if clear was pressed twice
-
+// allButtons is a ledger for button presses
+// heldNum is a ledger for all integer arrays put in before a action key is pressed
 let allButtons = document.getElementsByTagName('button')
 let lastButton = []
 for (let i = 0; i < allButtons.length; i++){
@@ -71,19 +60,39 @@ for (let i = 0; i < allButtons.length; i++){
     lastButton[1] = allButtons[i].id;
   });
 }
+
+//function that adds listener event to add integers to holdNum array
+// bind method allows to add outer functions into inner function before calling them.
+let holder = []
+for (let i = 0; i < intButtons.length; i++){
+  intButtons[i].addEventListener('click', holdNum.bind(this, intButtons[i]));
+  function holdNum(num){
+    if (holder.length <= 14) {
+      if (holder.includes('.') && (intButtons[i] == '.')){
+        return
+      } else{
+    holder.push(num.value)
+    calcDisplay.innerHTML = holder.join('')
+  }}}
+};
+
+
+
+//functionality for clear button
 function clearHolder(){
-  if (lastButton[0] = 'item1'){
-    //placeholder for reset calc function
-  } else {
+  if (lastButton[1] == 'item1'){
     holder = []; 
-    calcDisplay.innerHTML= holder;
+    calcDisplay.innerHTML= defaultValue.join('');
+  } else {
+  return
   }
 };
 
 buttonClear.addEventListener('click', clearHolder)
 
 
+
+
 // function operate
 let operate = function(a,b,c){
-
 }
