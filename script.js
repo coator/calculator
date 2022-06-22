@@ -2,8 +2,6 @@
 // Buttons for each item on the calculator
 
 // integers are intButtons
-
-
 const buttonClear = document.querySelector('#item1');
 const buttonRemember = document.querySelector('#item3');
 const buttonDivision = document.querySelector('#item4');
@@ -25,38 +23,51 @@ const buttonEquals = document.querySelector('#item20');
 const button = document.querySelectorAll('button')
 let calcDisplay = document.querySelector('.calcDisplay')
 
-
 // nodeList for all integers and the decimal
 const intButtons = document.querySelectorAll('.intButton')
 
 
-//reset value onload
-let defaultValue = [0,0,0,0,0,0,0,0,0,0,0,0,0]
-calcDisplay.innerHTML = defaultValue.join('')
-
-// LastButton holds last button to determine if clear was pressed twice
-// allButtons is a ledger for button presses
-// heldNum is a ledger for all integer arrays put in before a action key is pressed
 let allButtons = document.getElementsByTagName('button')
-let lastButton = ''
-for (let i = 0; i < allButtons.length; i++){
-  allButtons[i].addEventListener('click', function() {
-    lastButton = allButtons[i];
-  });
-}
+let lastButtonPressed = ''
 
-//holds all holder numbers between actions
+// array to hold calc operation history (add, sub, mult, div)
+let arrOperation = []
+
+// array to store integers until they are pushed into hHistory.
+let holder = []
+
+// hHistory holds all integer values between operations and passes them to the
+// operation func
 let hHistory = []
 
-//function that adds listener event to add integers to holdNum array
+// value for after clearing calc
+let defaultValue = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+// reset value onload
+function clearAll(){
+  holder = []
+  hHistory = []
+  lastButtonPressed = []
+  arrOperation = []
+  calcDisplay.innerHTML = 'WELCOME'
+}
+
+clearAll()
+
+// assigns lastButton function to allButton 
+for (let i = 0; i < allButtons.length; i++){
+  allButtons[i].addEventListener('click', function() {
+    lastButtonPressed = allButtons[i]}
+    )}
+
+// function that adds listener event to add integers to holdNum array
 // bind method allows to add outer functions into inner function before calling them.
-let holder = []
 for (let i = 0; i < intButtons.length; i++){
   intButtons[i].addEventListener('click', holdNum.bind(this, intButtons[i]));
   function holdNum(num){
     if (holder.length <= 14) {
       // will disallow another decimal if there is already a decimal present.
-      if ((holder.filter(i=> i==".").length>=1) && (lastButton.value == '.')){
+      if ((holder.filter(i=> i==".").length>=1) && (lastButtonPressed.value == '.')){
         return
       } else {
     holder.push(num.value)
@@ -71,6 +82,9 @@ function clearHolder(){
 };
 
 buttonClear.addEventListener('click', clearHolder)
+buttonClear.addEventListener('dblclick', clearAll)
+
+
 
 let equal = null
 let addition = (a, b) => a + b
@@ -87,16 +101,16 @@ let lib = {
 
 // function operate
 function operate(){
-  console.log(lastButton.value)
   // if holder is empty then ignore
   if (holder.length > 0){
+    arrOperation.push(lastButtonPressed.value)
+    console.log(arrOperation)
     hHistory.push(Number(holder.join('')))
     clearHolder()
     if (hHistory.length > 1){
-
       a = hHistory.pop()
       b = hHistory.pop()
-      c = lastButton.value
+      c = arrOperation.shift()
       output = lib[c](a,b)
       hHistory.push(output)
       // need to put in e values
@@ -108,10 +122,11 @@ function operate(){
   }
 }
 
-buttonAddition.addEventListener('click',operate())
-buttonSubtract.addEventListener('click',operate())
-buttonMultiply.addEventListener('click',operate())
-buttonDivision.addEventListener('click',operate())
+
+buttonAddition.addEventListener('click',() => operate)
+buttonSubtract.addEventListener('click',() => operate)
+buttonMultiply.addEventListener('click',() => operate)
+buttonDivision.addEventListener('click',() => operate)
 
 // nodeList for all operators and equal function
 const actionButtons = document.querySelectorAll('.actionButton')
