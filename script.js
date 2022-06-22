@@ -86,54 +86,53 @@ buttonClear.addEventListener('dblclick', clearAll)
 
 
 
-let equal = null
 let addition = (a, b) => a + b
 let subtract = (a, b) => a - b
 let multiply = (a, b) => a * b
 let division = (a, b) => a / b
-// let evaluate = (a, b) =>
 let lib = {
   'addition': addition,
   'subtraction': subtract,
   'multiply': multiply,  
-  'division': division,
-}
+  'division': division,}
 
-// function operate
 function operate(){
   // if holder is empty then ignore
   if (holder.length > 0){
     arrOperation.push(lastButtonPressed.value)
-    console.log(arrOperation)
     hHistory.push(Number(holder.join('')))
-    clearHolder()
+    holder=[]
+    // perform arithmetic action is there are two values.
     if (hHistory.length > 1){
-      a = hHistory.pop()
-      b = hHistory.pop()
-      c = arrOperation.shift()
-      output = lib[c](a,b)
-      hHistory.push(output)
-      // need to put in e values
+      let a = hHistory.pop();
+      let b = hHistory.pop();
+      let c = arrOperation.shift();
+      output = lib[c](a,b);
+      hHistory.push(output);
       // calculate for 0/0 error
       calcDisplay.innerHTML = output
       return
-    }
+}}}
 
+function equals(){
+  if (lastButtonPressed.value = 'equals' & arrOperation[0] == 'equals'){
+    return
   }
+  hHistory.push(Number(holder.join('')))
+  console.log(arrOperation, 'is arrOperation')
+  console.log(hHistory[1], ' is a')
+  console.log(hHistory[0], ' is b')
+  let a = hHistory.pop();
+  let b = hHistory.pop();
+  let c = arrOperation.shift();
 }
-
-
-buttonAddition.addEventListener('click',() => operate)
-buttonSubtract.addEventListener('click',() => operate)
-buttonMultiply.addEventListener('click',() => operate)
-buttonDivision.addEventListener('click',() => operate)
 
 // nodeList for all operators and equal function
 const actionButtons = document.querySelectorAll('.actionButton')
 
 
 // assign equals button
-buttonEquals.addEventListener('click', () => operate)
+buttonEquals.addEventListener('click', equals)
 
 
 
