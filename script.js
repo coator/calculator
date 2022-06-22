@@ -72,26 +72,28 @@ function clearHolder(){
 
 buttonClear.addEventListener('click', clearHolder)
 
-  let addition = (a, b) => a + b
-  let subtract = (a, b) => a - b
-  let multiply = (a, b) => a * b
-  let division = (a, b) => a / b
-  // let evaluate = (a, b) =>
-  let lib = {
+let equal = null
+let addition = (a, b) => a + b
+let subtract = (a, b) => a - b
+let multiply = (a, b) => a * b
+let division = (a, b) => a / b
+// let evaluate = (a, b) =>
+let lib = {
   'addition': addition,
-  'subtract': subtract,
+  'subtraction': subtract,
   'multiply': multiply,  
   'division': division,
 }
 
 // function operate
 function operate(){
+  console.log(lastButton.value)
   // if holder is empty then ignore
   if (holder.length > 0){
     hHistory.push(Number(holder.join('')))
     clearHolder()
-
     if (hHistory.length > 1){
+
       a = hHistory.pop()
       b = hHistory.pop()
       c = lastButton.value
