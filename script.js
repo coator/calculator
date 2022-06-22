@@ -69,7 +69,7 @@ for (let i = 0; i < intButtons.length; i++){
   intButtons[i].addEventListener('click', holdNum.bind(this, intButtons[i]));
   function holdNum(num){
     if (holder.length <= 14) {
-      if ((holder.filter(i=> i==".").length>1) && (intButtons[i] == '.')){
+      if ((holder.filter(i=> i==".").length>=1) && (lastButton[1].value == '.')){
         return
       } else {
     holder.push(num.value)
