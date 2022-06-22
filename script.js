@@ -57,7 +57,8 @@ let lastButton = []
 for (let i = 0; i < allButtons.length; i++){
   allButtons[i].addEventListener('click', function() {
     lastButton[0] = lastButton[1];
-    lastButton[1] = allButtons[i].id;
+    lastButton[1] = allButtons[i];
+    console.log(lastButton[1])
   });
 }
 
@@ -68,9 +69,9 @@ for (let i = 0; i < intButtons.length; i++){
   intButtons[i].addEventListener('click', holdNum.bind(this, intButtons[i]));
   function holdNum(num){
     if (holder.length <= 14) {
-      if (holder.includes('.') && (intButtons[i] == '.')){
+      if ((holder.filter(i=> i==".").length>1) && (intButtons[i] == '.')){
         return
-      } else{
+      } else {
     holder.push(num.value)
     calcDisplay.innerHTML = holder.join('')
   }}}
@@ -80,7 +81,7 @@ for (let i = 0; i < intButtons.length; i++){
 
 //functionality for clear button
 function clearHolder(){
-  if (lastButton[1] == 'item1'){
+  if (lastButton[1].id == 'item1'){
     holder = []; 
     calcDisplay.innerHTML= defaultValue.join('');
   } else {
