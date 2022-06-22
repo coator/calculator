@@ -2,7 +2,7 @@
 // Buttons for each item on the calculator
 
 // integers are intButtons
-// items =, /, *, -, +, = are actionButtons
+
 
 const buttonClear = document.querySelector('#item1');
 const buttonRemember = document.querySelector('#item3');
@@ -25,23 +25,8 @@ const buttonEquals = document.querySelector('#item20');
 const button = document.querySelectorAll('button')
 let calcDisplay = document.querySelector('.calcDisplay')
 
-// 4 operations for the items
-let addition = (a, b) => a + b
-let subtract = (a, b) => a - b
-let multiply = (a, b) => a * b
-let division = (a, b) => a / b
 
-// assign operation buttons
-buttonAddition.addEventListener('click', () => addition)
-buttonSubtract.addEventListener('click', () => subtract)
-buttonMultiply.addEventListener('click', () => multiply)
-buttonDivide.addEventListener('click', () => division)
-
-// assign equals button
-buttonEquals.addEventListener('click', () => operate)
-
-
-// integer holder array for the current number displayed
+// nodeList for all integers and the decimal
 const intButtons = document.querySelectorAll('.intButton')
 
 
@@ -58,9 +43,11 @@ for (let i = 0; i < allButtons.length; i++){
   allButtons[i].addEventListener('click', function() {
     lastButton[0] = lastButton[1];
     lastButton[1] = allButtons[i];
-    console.log(lastButton[1])
   });
 }
+
+//holds all holder numbers between actions
+let historyHolder = []
 
 //function that adds listener event to add integers to holdNum array
 // bind method allows to add outer functions into inner function before calling them.
@@ -77,23 +64,40 @@ for (let i = 0; i < intButtons.length; i++){
   }}}
 };
 
-
-
-//functionality for clear button
+// function that clears current items in holder.
 function clearHolder(){
-  if (lastButton[1].id == 'item1'){
-    holder = []; 
-    calcDisplay.innerHTML= defaultValue.join('');
-  } else {
-  return
-  }
+  holder = []; 
+  calcDisplay.innerHTML= defaultValue.join('');
 };
+
 
 buttonClear.addEventListener('click', clearHolder)
 
+  let addition = (a, b) => a + b
+  let subtract = (a, b) => a - b
+  let multiply = (a, b) => a * b
+  let division = (a, b) => a / b
 
-
+// nodeList for all operators and equal function
+const actionButtons = document.querySelectorAll('.actionButton')
 
 // function operate
-let operate = function(a,b,c){
+function operate(){
+  if (holder.length>=1){
+  historyHolder.push(holder)
+  historyHolder.push(lastButton[1].value)
+  clearHolder()
+  console.log('a')
+  return
+  }
+}
+
+
+// assign equals button
+buttonEquals.addEventListener('click', () => operate)
+
+
+
+for (let i = 0; i < actionButtons.length; i++){
+  actionButtons[i].addEventListener('click', operate.bind(this, actionButtons[i]))
 }
