@@ -122,9 +122,12 @@ function equals(){
   console.log(arrOperation, 'is arrOperation')
   console.log(hHistory[1], ' is a')
   console.log(hHistory[0], ' is b')
-  let a = hHistory.pop();
-  let b = hHistory.pop();
+  let a = hHistory[1];
+  let b = hHistory.shift();
   let c = arrOperation.shift();
+  output = lib[c](a,b);
+  hHistory.push(output)
+  calcDisplay.innerHTML = output
 }
 
 // nodeList for all operators and equal function
