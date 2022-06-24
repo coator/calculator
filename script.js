@@ -96,48 +96,44 @@ let lib = {
   'multiply': multiply,  
   'division': division,}
 
-function operate2(){
-  if (holder.length>0){
-
-  }
-}
-
 function operate(){
-  // if holder is empty then ignore
   if (holder.length > 0){
-    arrOperation.push(lastButtonPressed.value)
     hHistory.push(Number(holder.join('')))
+    hHistory.push(lastButtonPressed.value)
+    console.log(hHistory, ' is hHistory before the operation is executed')
     holder=[]
-    // perform arithmetic action is there are two values.
-    if (hHistory.length > 1){
-      let a = hHistory.pop();
-      let b = hHistory.pop();
-      let c = arrOperation.shift();
-      output = lib[c](a,b);
-      console.log(hHistory[1], ' is a');
-      console.log(hHistory[0], ' is b');
-      console.log(arrOperation, 'is c');
-      hHistory.push(output);
-      // calculate for 0/0 error
-      calcDisplay.innerHTML = output
+  } else if (hHistory[1] = 'equal'){
+    hHistory[1] = lastButtonPressed.value
+    console.log(hHistory, ' is hHistory before the operation is executed')
+  }
+    if (hHistory.length > 2){
+      a = hHistory[0]
+      c = hHistory[1]
+      b = hHistory[2]
+      output = lib[c](a,b)
+      console.log(a, c, b, '=', output)
+      hHistory = [output, lastButtonPressed.value]
+      console.log(hHistory, ' is hHistory after the operation is executed')
+      calcDisplay.textContent=output
+      //calculate for 1/0 error
       return
-}}}
+}}
 
 function equals(){
-  if (lastButtonPressed.value = 'equals' & arrOperation[0] == 'equals'){
-    return
-  }
-  else {
+  if (hHistory.length > 1 && holder.length > 0){
     hHistory.push(Number(holder.join('')))
-    console.log(hHistory[1], ' is a')
-    console.log(hHistory[0], ' is b')
-    let a = hHistory[1];
-    let b = hHistory.shift();
-    let c = arrOperation.shift();
-    console.log(arrOperation, 'is c')
-    output = lib[c](a,b);
-    hHistory.push(output)
-    calcDisplay.innerHTML = output
+    console.log(hHistory, ' is hHistory after the operation is executed')
+    holder=[]
+    a = hHistory[0]
+    c = hHistory[1]
+    b = hHistory[2]
+    output = lib[c](a,b)
+    console.log(a, c, b, '=', output)
+    hHistory = [output, lastButtonPressed.value]
+    console.log(hHistory, ' is hHistory after the operation is executed')
+    calcDisplay.textContent=output
+    //calculate for 1/0 error
+  return
   }
 }
 
