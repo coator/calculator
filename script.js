@@ -100,12 +100,11 @@ function operate(){
   if (holder.length > 0){
     hHistory.push(Number(holder.join('')))
     hHistory.push(lastButtonPressed.value)
-    console.log(hHistory, ' is hHistory before the operation is executed')
     holder=[]
-  } else if (hHistory[1] = 'equal'){
+  }
+  if (hHistory[1] = 'equal' && hHistory.length < 4){
     hHistory[1] = lastButtonPressed.value
     console.log(hHistory, ' is hHistory before the operation is executed')
-  }
     if (hHistory.length > 2){
       a = hHistory[0]
       c = hHistory[1]
@@ -115,12 +114,18 @@ function operate(){
       hHistory = [output, lastButtonPressed.value]
       console.log(hHistory, ' is hHistory after the operation is executed')
       calcDisplay.textContent=output
-      //calculate for 1/0 error
       return
-}}
+    }
+  } else if (hHistory[1] = 'equal' && hHistory.length > 3 ) {
+    hHistory.shift()
+    hHistory.shift()
+    console.log(hHistory, ' is hHistory after the operation is executed and length >3')
+  }
+  
+}
 
 function equals(){
-  if (hHistory.length > 1 && holder.length > 0){
+  if (hHistory.length > 1 && holder.length > 0 && hHistory[1] != 'equal') {
     hHistory.push(Number(holder.join('')))
     console.log(hHistory, ' is hHistory after the operation is executed')
     holder=[]
