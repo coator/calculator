@@ -96,6 +96,12 @@ let lib = {
   'multiply': multiply,  
   'division': division,}
 
+function operate2(){
+  if (holder.length>0){
+
+  }
+}
+
 function operate(){
   // if holder is empty then ignore
   if (holder.length > 0){
@@ -108,6 +114,9 @@ function operate(){
       let b = hHistory.pop();
       let c = arrOperation.shift();
       output = lib[c](a,b);
+      console.log(hHistory[1], ' is a');
+      console.log(hHistory[0], ' is b');
+      console.log(arrOperation, 'is c');
       hHistory.push(output);
       // calculate for 0/0 error
       calcDisplay.innerHTML = output
@@ -118,16 +127,18 @@ function equals(){
   if (lastButtonPressed.value = 'equals' & arrOperation[0] == 'equals'){
     return
   }
-  hHistory.push(Number(holder.join('')))
-  console.log(arrOperation, 'is arrOperation')
-  console.log(hHistory[1], ' is a')
-  console.log(hHistory[0], ' is b')
-  let a = hHistory[1];
-  let b = hHistory.shift();
-  let c = arrOperation.shift();
-  output = lib[c](a,b);
-  hHistory.push(output)
-  calcDisplay.innerHTML = output
+  else {
+    hHistory.push(Number(holder.join('')))
+    console.log(hHistory[1], ' is a')
+    console.log(hHistory[0], ' is b')
+    let a = hHistory[1];
+    let b = hHistory.shift();
+    let c = arrOperation.shift();
+    console.log(arrOperation, 'is c')
+    output = lib[c](a,b);
+    hHistory.push(output)
+    calcDisplay.innerHTML = output
+  }
 }
 
 // nodeList for all operators and equal function
