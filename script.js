@@ -49,6 +49,7 @@ function clearAll(){
   hHistory = []
   lastButtonPressed = []
   arrOperation = []
+  calcDisplay.setAttribute("style","font-size: 30pt")
   calcDisplay.innerHTML = 'WELCOME'
 }
 
@@ -96,6 +97,14 @@ let lib = {
   'multiply': multiply,  
   'division': division,}
 
+
+function resizeOutput(){
+  if (String(output).length>14){
+    calcDisplay.setAttribute("style","font-size: 20pt")
+    // console.log(calcDisplay.getAttribute('style','font-size'))
+  }}
+
+
 function operate(){
   if (holder.length > 0){
     hHistory.push(Number(holder.join('')))
@@ -104,7 +113,6 @@ function operate(){
   }
   if (hHistory[1] = 'equal' && hHistory.length < 4){
     hHistory[1] = lastButtonPressed.value
-    console.log(hHistory, ' is hHistory before the operation is executed')
     if (hHistory.length > 2){
       a = hHistory[0]
       c = hHistory[1]
@@ -112,14 +120,14 @@ function operate(){
       output = lib[c](a,b)
       console.log(a, c, b, '=', output)
       hHistory = [output, lastButtonPressed.value]
-      console.log(hHistory, ' is hHistory after the operation is executed')
+      console.log(output.length)
+      resizeOutput()
       calcDisplay.textContent=output
       return
     }
   } else if (hHistory[1] = 'equal' && hHistory.length > 3 ) {
     hHistory.shift()
     hHistory.shift()
-    console.log(hHistory, ' is hHistory after the operation is executed and length >3')
   }
   
 }
@@ -127,15 +135,16 @@ function operate(){
 function equals(){
   if (hHistory.length > 1 && holder.length > 0 && hHistory[1] != 'equal') {
     hHistory.push(Number(holder.join('')))
-    console.log(hHistory, ' is hHistory after the operation is executed')
+    // console.log(hHistory, ' is hHistory after the operation is executed')
     holder=[]
     a = hHistory[0]
     c = hHistory[1]
     b = hHistory[2]
     output = lib[c](a,b)
-    console.log(a, c, b, '=', output)
+    // console.log(a, c, b, '=', output)
     hHistory = [output, lastButtonPressed.value]
-    console.log(hHistory, ' is hHistory after the operation is executed')
+    //console.log(hHistory, ' is hHistory after the operation is executed')
+    resizeOutput()
     calcDisplay.textContent=output
     //calculate for 1/0 error
   return
